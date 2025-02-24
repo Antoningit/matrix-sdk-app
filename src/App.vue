@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <nav>
-      <router-link to="/">Login</router-link>
-      <router-link v-if="matrixStore.client != null" to="/chats">Chats</router-link>
+      <router-link v-if="matrixStore.client == null" to="/">Login</router-link>
+      <router-link v-else to="/chats">Chats</router-link>
     </nav>
     <router-view />
   </div>

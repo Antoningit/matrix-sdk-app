@@ -28,7 +28,7 @@ npm install
 Если сервер требует другие параметры, настройте их в `store.ts`:
 
 ```ts
-const homeserver = "https://matrix.org"; // Измените на нужный сервер
+const homeserver = 'https://matrix.org'; // Измените на нужный сервер
 ```
 
 ---
@@ -63,6 +63,7 @@ npm run preview
 
 ```sh
 npm run lint
+npm run format
 ```
 
 Проверяет код на ошибки и стилистические проблемы.

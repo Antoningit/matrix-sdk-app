@@ -5,7 +5,7 @@
       <input v-model="username" placeholder="Логин" required />
       <input v-model="password" type="password" placeholder="Пароль" required />
       <button type="submit" :disabled="matrixStore.isLoading">
-        {{ matrixStore.isLoading ? "Загрузка..." : "Войти" }}
+        {{ matrixStore.isLoading ? 'Загрузка...' : 'Войти' }}
       </button>
     </form>
 
@@ -42,7 +42,11 @@ const handleLogin = async () => {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 </style>
