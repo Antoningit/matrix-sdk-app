@@ -25,24 +25,24 @@ onMounted(() => {
 
 const sortedRooms = computed(() => {
   const rooms = matrixStore.rooms as Room[];
-  return [...rooms.sort((a: Room, b: Room) => {
-    const lastEventA = a.timeline[0]?.event.origin_server_ts || 0;
-    const lastEventB = b.timeline[0]?.event.origin_server_ts || 0;
-    
-    if (lastEventA !== lastEventB) {
-      return lastEventB - lastEventA;
-    }
-    
-    return a.name.localeCompare(b.name);
-  })];
+  return [
+    ...rooms.sort((a: Room, b: Room) => {
+      const lastEventA = a.timeline[0]?.event.origin_server_ts || 0;
+      const lastEventB = b.timeline[0]?.event.origin_server_ts || 0;
+
+      if (lastEventA !== lastEventB) {
+        return lastEventB - lastEventA;
+      }
+
+      return a.name.localeCompare(b.name);
+    }),
+  ];
 });
 
 const resolveMessages = (room: Room) => {
   const lastEvent = room.timeline[room.timeline.length - 1]?.event?.content?.body;
   return lastEvent ?? 'No messages';
 };
-
-
 
 const logout = () => {
   matrixStore.logout();

@@ -20,6 +20,7 @@ export default [
     rules: {
       ...prettierConfig.rules,
       'prettier/prettier': 'error',
+      'vue/multi-word-component-names': 'off',
     },
     languageOptions: { parserOptions: { parser: tseslint.parser } },
   },

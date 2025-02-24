@@ -17,18 +17,18 @@ export const useMatrixStore = defineStore('matrix', {
     accessToken: localStorage.getItem('matrix_access_token') || null,
     homeserver: localStorage.getItem('matrix_homeserver') || null,
     userId: localStorage.getItem('matrix_user_id') || null,
-    isLoading: false
+    isLoading: false,
   }),
 
   actions: {
     async login(homeserver: string, username: string, password: string): Promise<void> {
-      this.isLoading = true
+      this.isLoading = true;
       try {
         const client = createClient({ baseUrl: homeserver });
-        const response = await client.login("m.login.password", {
-          identifier: { type: "m.id.user", user: username },
+        const response = await client.login('m.login.password', {
+          identifier: { type: 'm.id.user', user: username },
           password: password,
-          initial_device_display_name: "My App",
+          initial_device_display_name: 'My App',
         });
 
         client.setAccessToken(response.access_token);
@@ -44,9 +44,9 @@ export const useMatrixStore = defineStore('matrix', {
 
         await this.startAndSyncClient();
       } catch (error) {
-        console.error("Login failed:", error);
+        console.error('Login failed:', error);
       } finally {
-        this.isLoading = false
+        this.isLoading = false;
       }
     },
 
@@ -62,40 +62,40 @@ export const useMatrixStore = defineStore('matrix', {
 
         this.client = client;
         await this.startAndSyncClient();
-        console.log("Session restored");
+        console.log('Session restored');
       } catch (error) {
-        console.error("Session restore failed:", error);
+        console.error('Session restore failed:', error);
         this.logout();
       }
     },
 
     async startAndSyncClient(): Promise<void> {
       if (!this.client) return;
-    
+
       this.client.startClient({
         initialSyncLimit: 10,
       });
-    
+
       this.rooms = this.client.getRooms();
-    
-      this.client.on("sync" as EmittedEvents, (state: SyncState) => {
-        if (state === "SYNCING" || state === "PREPARED") {
+
+      this.client.on('sync' as EmittedEvents, (state: SyncState) => {
+        if (state === 'SYNCING' || state === 'PREPARED') {
           this.fetchRooms();
         }
       });
-    
-      this.client.on("Room" as EmittedEvents, () => {
+
+      this.client.on('Room' as EmittedEvents, () => {
         this.fetchRooms();
       });
-    
+
       await new Promise<void>((resolve) => {
-        this.client!.once("sync" as EmittedEvents, (state: SyncState) => {
-          if (state === "PREPARED") resolve();
+        this.client!.once('sync' as EmittedEvents, (state: SyncState) => {
+          if (state === 'PREPARED') resolve();
         });
       });
-    
+
       this.fetchRooms();
-    },    
+    },
 
     logout(): void {
       if (this.client) {
@@ -115,6 +115,6 @@ export const useMatrixStore = defineStore('matrix', {
     async fetchRooms(): Promise<void> {
       if (!this.client) return;
       this.rooms = this.client.getRooms();
-    }
-  }
+    },
+  },
 });
