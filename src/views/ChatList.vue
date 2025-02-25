@@ -12,7 +12,7 @@
 
 <script setup lang="ts">
 import { computed, onMounted } from 'vue';
-import { useMatrixStore } from '@/store/store';
+import { useMatrixStore } from '../store/store';
 import { useRouter } from 'vue-router';
 import { Room } from 'matrix-js-sdk';
 

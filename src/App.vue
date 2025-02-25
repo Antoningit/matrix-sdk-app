@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import { useMatrixStore } from '@/store/store';
+import { useMatrixStore } from './store/store';
 
 const matrixStore = useMatrixStore();
 </script>
